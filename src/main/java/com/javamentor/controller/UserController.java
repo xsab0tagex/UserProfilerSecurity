@@ -32,9 +32,8 @@ public class UserController {
         return mv;
     }
 
-    @RequestMapping(value = "/allUsers", method = RequestMethod.POST)
+    @RequestMapping(value = "/allUsers", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView displayAllUser() {
-        System.out.println("User Page Requested : All Users");
         ModelAndView mv = new ModelAndView();
         List<User> userList = userService.getAllUsers();
         mv.addObject("userList", userList);
@@ -52,15 +51,17 @@ public class UserController {
 
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
     public ModelAndView saveNewUser(@ModelAttribute User user, BindingResult result) {
-        ModelAndView mv = new ModelAndView("redirect:/home");
+        return getModelAndView(user, result);
+    }
+
+    private ModelAndView getModelAndView(@ModelAttribute User user, BindingResult result) {
+        ModelAndView mv = new ModelAndView("redirect:/allUsers");
 
         if (result.hasErrors()) {
             return new ModelAndView("error");
         }
         boolean isAdded = userService.saveUser(user);
-        if (isAdded) {
-            mv.addObject("message", "New user successfully added");
-        } else {
+        if (!isAdded) {
             return new ModelAndView("error");
         }
         return mv;
@@ -77,22 +78,13 @@ public class UserController {
 
     @RequestMapping(value = "/editUser/{id}", method = RequestMethod.POST)
     public ModelAndView saveEditedUser(@ModelAttribute User user, BindingResult result) {
-        ModelAndView mv = new ModelAndView("redirect:/home");
-
-        if (result.hasErrors()) {
-            return new ModelAndView("error");
-        }
-        boolean isSaved = userService.saveUser(user);
-        if (!isSaved) {
-            return new ModelAndView("error");
-        }
-        return mv;
+        return getModelAndView(user, result);
     }
 
     @RequestMapping(value = "/deleteUser/{id}", method = RequestMethod.GET)
     public ModelAndView deleteUserById(@PathVariable Long id) {
         userService.deleteUserById(id);
-        return new ModelAndView("redirect:/home");
+        return new ModelAndView("redirect:/allUsers");
 
     }
 

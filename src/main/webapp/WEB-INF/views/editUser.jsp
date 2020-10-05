@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Home</title>
+    <title>Редактирование пользователя</title>
 </head>
 <body>
 <h1>${headerMessage}</h1>
@@ -14,21 +14,21 @@
 <form:form method="POST" action="editUser" modelAttribute="user">
 
     <form:hidden path="id" />
-    <table>
+    <table border="1">
         <tr>
-            <td><form:label path="firstName">First Name</form:label></td>
+            <td><form:label path="firstName">Имя</form:label></td>
             <td><form:input path="firstName"/></td>
         </tr>
         <tr>
-            <td><form:label path="lastName">LastName</form:label></td>
+            <td><form:label path="lastName">Фамилия</form:label></td>
             <td><form:input path="lastName"/></td>
         </tr>
         <tr>
-            <td><form:label path="userName">UserName</form:label></td>
+            <td><form:label path="userName">Логин</form:label></td>
             <td><form:input path="userName"/></td>
         </tr>
         <tr>
-            <td><input type="submit" value="Submit"/></td>
+            <td><input type="submit" value="Подтвердить"/></td>
         </tr>
     </table>
 </form:form>

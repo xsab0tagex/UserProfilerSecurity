@@ -5,26 +5,26 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>All Users</title>
+    <title>Список пользователей</title>
 </head>
 <body>
 <br>
 <br>
 <br>
-<a href="${pageContext.request.contextPath}/addUser">Add User</a>
 <br>
-<h3>List of all users</h3>
+<h3>Список пользователей</h3>
 ${message}
 <br>
 <br>
-<table border="1px" cellpadding="0" cellspacing="0">
+<table border="1">
     <thead>
+
     <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>UserName</th>
-        <th>Edit</th>
-        <th>Delete</th>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Login</th>
+        <th></th>
+        <th></th>
     </tr>
     </thead>
 
@@ -34,15 +34,28 @@ ${message}
             <td>${user.firstName}</td>
             <td>${user.lastName}</td>
             <td>${user.userName}</td>
-            <td><a
-                    href="${pageContext.request.contextPath}/editUser/${user.id}">Edit</a></td>
-            <td><a
-                    href="${pageContext.request.contextPath}/deleteUser/${user.id}">Delete</a></td>
+            <td>
+                <form action="${pageContext.request.contextPath}/editUser/${user.id}" target="_self">
+                    <button>Редактировать</button>
+                </form></td>
+            <td>
+                <form action="${pageContext.request.contextPath}/deleteUser/${user.id}" target="_self">
+                    <button>Удалить</button>
+                </form>
+            </td>
+
         </tr>
     </c:forEach>
     </tbody>
 
 
 </table>
+<br>
+<br>
+<br>
+<form action="${pageContext.request.contextPath}/addUser" target="_self">
+    <button>Добавить пользователя</button>
+</form>
+
 </body>
 </html>

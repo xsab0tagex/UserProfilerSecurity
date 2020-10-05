@@ -14,7 +14,7 @@
 <br>
 <br>
 <form action="allUsers" method="post">
-    <input type="submit" value="List All Users" />
+    <input type="submit" value="Список пользователей" />
 </form>
 </body>
 </html>
