@@ -25,14 +25,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
-    public ModelAndView hello() {
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("home");
-        return mv;
-    }
-
-    @RequestMapping(value = "/allUsers", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = {"/", "/allUsers"}, method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView displayAllUser() {
         ModelAndView mv = new ModelAndView();
         List<User> userList = userService.getAllUsers();

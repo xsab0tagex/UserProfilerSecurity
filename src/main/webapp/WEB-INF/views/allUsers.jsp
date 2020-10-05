@@ -8,14 +8,11 @@
     <title>Список пользователей</title>
 </head>
 <body>
-<br>
-<br>
-<br>
-<br>
+
 <h3>Список пользователей</h3>
 ${message}
 <br>
-<br>
+
 <table border="1">
     <thead>
 
@@ -31,14 +28,14 @@ ${message}
     <tbody>
     <c:forEach var="user" items="${userList}">
         <tr>
-            <td>${user.firstName}</td>
-            <td>${user.lastName}</td>
-            <td>${user.userName}</td>
-            <td>
+            <td align="center">${user.firstName}</td>
+            <td align="center">${user.lastName}</td>
+            <td align="center">${user.userName}</td>
+            <td align="center">
                 <form action="${pageContext.request.contextPath}/editUser/${user.id}" target="_self">
                     <button>Редактировать</button>
                 </form></td>
-            <td>
+            <td align="center">
                 <form action="${pageContext.request.contextPath}/deleteUser/${user.id}" target="_self">
                     <button>Удалить</button>
                 </form>
@@ -50,8 +47,6 @@ ${message}
 
 
 </table>
-<br>
-<br>
 <br>
 <form action="${pageContext.request.contextPath}/addUser" target="_self">
     <button>Добавить пользователя</button>
