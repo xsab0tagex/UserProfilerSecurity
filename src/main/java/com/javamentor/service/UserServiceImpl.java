@@ -15,7 +15,6 @@ import com.javamentor.repository.UserRepository;
 @Transactional
 public class UserServiceImpl implements UserService {
 
-    // Implementing Constructor based DI
     private UserRepository repository;
 
     public UserServiceImpl() {
@@ -37,7 +36,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserById(Long id) {
-        return repository.findById(id).get();
+        return repository.findById(id).orElse(null);
     }
 
     @Override
