@@ -11,11 +11,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @ComponentScan(basePackages = "com.javamentor")
 public class WebMvcConfig implements WebMvcConfigurer {
 
-//    @Override
-//    public void configureViewResolvers(ViewResolverRegistry registry) {
-//        registry.jsp().prefix("/WEB-INF/views/").suffix(".jsp");
-//    }
-
     public void configureViewResolvers(ViewResolverRegistry registry) {
         registry.jsp("/WEB-INF/views/", ".jsp");
     }

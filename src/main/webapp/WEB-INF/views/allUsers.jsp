@@ -32,12 +32,12 @@ ${message}
             <td align="center">${user.lastName}</td>
             <td align="center">${user.userName}</td>
             <td align="center">
-                <form action="${pageContext.request.contextPath}/editUser/${user.id}" target="_self">
+                <form action="${pageContext.request.contextPath}/editUser/${user.id}" target="_self"    >
                     <button>Редактировать</button>
                 </form></td>
             <td align="center">
-                <form action="${pageContext.request.contextPath}/deleteUser/${user.id}" target="_self">
-                    <button>Удалить</button>
+                    <form action="${pageContext.request.contextPath}/deleteUser/${user.id}" method="post">
+                        <input type="submit" name="delete" value="Delete" />
                 </form>
             </td>
 

@@ -1,6 +1,5 @@
 package com.javamentor.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -15,11 +14,7 @@ import com.javamentor.repository.UserRepository;
 @Transactional
 public class UserServiceImpl implements UserService {
 
-    private UserRepository repository;
-
-    public UserServiceImpl() {
-
-    }
+    private final UserRepository repository;
 
     @Autowired
     public UserServiceImpl(UserRepository repository) {
@@ -29,9 +24,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAllUsers() {
-        List<User> list = new ArrayList<>();
-        repository.findAll().forEach(list::add);
-        return list;
+        return (List<User>) repository.findAll();
     }
 
     @Override
@@ -50,12 +43,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean deleteUserById(Long id) {
+    public void deleteUserById(Long id) {
         try {
             repository.deleteById(id);
-            return true;
         } catch (Exception ex) {
-            return false;
         }
 
     }
