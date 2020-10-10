@@ -1,10 +1,18 @@
 package com.javamentor.repository;
 
 import com.javamentor.entity.User;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
 
-@Repository
-public interface UserRepository extends CrudRepository <User, Long>{
+import java.util.List;
 
+public interface UserRepository {
+
+    List<User> findAll();
+
+    User findById(Long id);
+
+    void save(User user);
+
+    void deleteById(Long id);
+
+    void updateUser(User user);
 }

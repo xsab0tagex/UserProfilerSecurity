@@ -33,10 +33,6 @@ public class UserController {
         return "addUser";
     }
 
-    @PostMapping(value = "/addUser")
-    public String saveNewUser(@ModelAttribute User user) {
-        return saveUser(user);
-    }
 
     @GetMapping(value = "/editUser/{id}")
     public String displayEditUserForm(@PathVariable Long id, Model model) {
@@ -46,19 +42,23 @@ public class UserController {
         return "editUser";
     }
 
-    @PostMapping(value = "/editUser/{id}")
-    public String saveEditedUser(@ModelAttribute User user) {
-        return saveUser(user);
-    }
-
     @PostMapping(value = "/deleteUser/{id}")
     public String deleteUserById(@PathVariable Long id) {
         userService.deleteUserById(id);
         return "redirect:/allUsers";
-
     }
 
-    private String saveUser(@ModelAttribute User user) {
+    @PostMapping(value = "/editUser/{id}")
+    public String saveEditedUser(@ModelAttribute User user) {
+        boolean isUpdated = userService.updateUser(user);
+        if (!isUpdated) {
+            return "error";
+        }
+        return "redirect:/allUsers";
+    }
+
+    @PostMapping(value = "/addUser")
+    public String saveNewUser(@ModelAttribute User user) {
         boolean isAdded = userService.saveUser(user);
         if (!isAdded) {
             return "error";

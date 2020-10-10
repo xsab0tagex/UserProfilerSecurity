@@ -24,12 +24,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAllUsers() {
-        return (List<User>) repository.findAll();
+        return repository.findAll();
     }
 
     @Override
     public User getUserById(Long id) {
-        return repository.findById(id).orElse(null);
+        return repository.findById(id);
     }
 
     @Override
@@ -43,12 +43,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUserById(Long id) {
+    public boolean updateUser(User user) {
         try {
-            repository.deleteById(id);
+            repository.updateUser(user);
+            return true;
         } catch (Exception ex) {
+            return false;
         }
+    }
 
+    @Override
+    public void deleteUserById(Long id) {
+        repository.deleteById(id);
     }
 
 }
