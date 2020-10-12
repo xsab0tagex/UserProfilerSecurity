@@ -29,19 +29,21 @@ public class User {
         return lastName;
     }
 
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-//    public void setFirstName(String firstName) {
-//        this.firstName = firstName;
-//    }
-//    public void setUserName(String userName) {
-//        this.userName = userName;
-//    }
-//    public void setId(long id) {
-//        this.id = id;
-//    }
-//    public void setLastName(String lastName) {
-//        this.lastName = lastName;
-//    }
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
     @Override
     public String toString() {

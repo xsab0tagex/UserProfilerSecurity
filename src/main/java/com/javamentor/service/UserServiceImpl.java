@@ -14,13 +14,8 @@ import com.javamentor.repository.UserRepository;
 @Transactional
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository repository;
-
     @Autowired
-    public UserServiceImpl(UserRepository repository) {
-        super();
-        this.repository = repository;
-    }
+    private UserRepository repository;
 
     @Override
     public List<User> getAllUsers() {
