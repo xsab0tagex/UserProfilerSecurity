@@ -1,9 +1,13 @@
 package com.javamentor.service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
+import com.javamentor.entity.Role;
+import com.javamentor.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,22 +19,28 @@ import com.javamentor.repository.UserRepository;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserRepository repository;
+    private UserRepository userRepository;
+
+    @Autowired
+    private RoleRepository roleRepository;
 
     @Override
     public List<User> getAllUsers() {
-        return repository.findAll();
+        return userRepository.findAll();
     }
 
     @Override
     public User getUserById(Long id) {
-        return repository.findById(id);
+        return userRepository.findById(id);
     }
 
     @Override
     public boolean saveUser(User user) {
+        Set<Role> roles = new HashSet<>();
+        roles.add(roleRepository.getById(1L));
+        user.setRoles(roles);
         try {
-            repository.save(user);
+            userRepository.save(user);
             return true;
         } catch (Exception ex) {
             return false;
@@ -40,7 +50,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean updateUser(User user) {
         try {
-            repository.updateUser(user);
+            userRepository.updateUser(user);
             return true;
         } catch (Exception ex) {
             return false;
@@ -49,7 +59,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUserById(Long id) {
-        repository.deleteById(id);
+        userRepository.deleteById(id);
     }
 
 }

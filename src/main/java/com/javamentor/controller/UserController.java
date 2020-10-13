@@ -22,6 +22,11 @@ public class UserController {
         return "allUsers";
     }
 
+    @GetMapping(value = "login")
+    public String loginPage() {
+        return "login";
+    }
+
     @GetMapping(value = "/addUser")
     public String displayNewUserForm(Model model) {
         model.addAttribute("headerMessage", "Введите данные пользователя");

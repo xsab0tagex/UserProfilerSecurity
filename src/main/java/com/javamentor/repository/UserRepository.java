@@ -1,6 +1,7 @@
 package com.javamentor.repository;
 
 import com.javamentor.entity.User;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 
@@ -15,4 +16,6 @@ public interface UserRepository {
     void deleteById(Long id);
 
     void updateUser(User user);
+
+    User getUserByName(String username);
 }

@@ -28,6 +28,10 @@
             <td><form:input path="userName"/></td>
         </tr>
         <tr>
+            <td><form:label path="passWord">Пароль</form:label></td>
+            <td><form:input path="passWord"/></td>
+        </tr>
+        <tr>
             <td><input type="submit" value="Подтвердить"/></td>
         </tr>
     </table>

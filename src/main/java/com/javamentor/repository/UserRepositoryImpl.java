@@ -1,6 +1,7 @@
 package com.javamentor.repository;
 
 import com.javamentor.entity.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {
+
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -43,5 +45,10 @@ public class UserRepositoryImpl implements UserRepository {
     public void updateUser(User user) {
         entityManager
                 .merge(user);
+    }
+
+    @Override
+    public User getUserByName(String username) {
+        return entityManager.find(User.class, username);
     }
 }
