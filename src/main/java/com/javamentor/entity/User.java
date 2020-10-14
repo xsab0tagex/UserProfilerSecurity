@@ -5,7 +5,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -13,13 +12,13 @@ import java.util.Set;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String userName;
     private String firstName;
     private String lastName;
     private String passWord;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;

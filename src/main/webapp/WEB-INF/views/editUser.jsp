@@ -10,10 +10,9 @@
 </head>
 <body>
 <h1>${headerMessage}</h1>
-
 <form:form method="POST" action="editUser" modelAttribute="user">
-
     <form:hidden path="id" />
+
     <table border="1">
         <tr>
             <td><form:label path="firstName">Имя</form:label></td>
@@ -32,6 +31,11 @@
             <td><form:input path="passWord"/></td>
         </tr>
         <tr>
+            <td><form:label path="roles">Роли</form:label></td>
+            <td><form:input path="roles"/>${roles}</td>
+        </tr>
+        <tr>
+
             <td><input type="submit" value="Подтвердить"/></td>
         </tr>
     </table>

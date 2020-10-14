@@ -1,5 +1,6 @@
 package com.javamentor.controller;
 
+import com.javamentor.entity.Role;
 import com.javamentor.entity.User;
 import com.javamentor.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class UserController {
@@ -39,22 +43,24 @@ public class UserController {
         return "addUser";
     }
 
-    @GetMapping(value = "/editUser/{id}")
-    public String displayEditUserForm(@PathVariable Long id, Model model) {
-        User user = userService.getUserById(id);
-        model.addAttribute("headerMessage", "Редактирование пользователя");
-        model.addAttribute("user", user);
-        return "editUser";
-    }
-
     @PostMapping(value = "/deleteUser/{id}")
     public String deleteUserById(@PathVariable Long id) {
         userService.deleteUserById(id);
         return "redirect:/allUsers";
     }
 
+    @GetMapping(value = "/editUser/{id}")
+    public String displayEditUserForm(@PathVariable Long id, Model model) {
+        User user = userService.getUserById(id);
+        model.addAttribute("headerMessage", "Редактирование пользователя");
+        model.addAttribute("user", user);
+        model.addAttribute("roles", user.getRoles());
+        return "editUser";
+    }
+
     @PostMapping(value = "/editUser/{id}")
-    public String saveEditedUser(@ModelAttribute User user) {
+    public String saveEditedUser( @ModelAttribute User user) {
+        System.out.println(user.getRoles());
         boolean isUpdated = userService.updateUser(user);
         if (!isUpdated) {
             return "error";
