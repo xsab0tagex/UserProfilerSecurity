@@ -54,13 +54,11 @@ public class UserController {
         User user = userService.getUserById(id);
         model.addAttribute("headerMessage", "Редактирование пользователя");
         model.addAttribute("user", user);
-        model.addAttribute("roles", user.getRoles());
         return "editUser";
     }
 
     @PostMapping(value = "/editUser/{id}")
     public String saveEditedUser( @ModelAttribute User user) {
-        System.out.println(user.getRoles());
         boolean isUpdated = userService.updateUser(user);
         if (!isUpdated) {
             return "error";

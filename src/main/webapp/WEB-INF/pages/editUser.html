@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование пользователя</title>
+</head>
+<body>
+
+
+<form th:action="@{editUser}" th:object="${user}" method="post">
+    <p>id: <input type="hidden" th:field="*{id}"/></p>
+    <p>Роль: <input type="hidden" th:field="*{roles}"/></p>
+    <p>Имя: <label>
+        <input class="form-control" type="text" th:field="*{firstName}"/>
+    </label></p>
+    <p>Фамилия: <label>
+        <input class="form-control" type="text" th:field="*{lastName}"/>
+    </label></p>
+    <p>Логин: <label>
+        <input class="form-control" type="text" th:field="*{userName}"/>
+    </label></p>
+    <p>Пароль: <label>
+        <input class="form-control" type="text" th:field="*{passWord}"/>
+    </label></p>
+    <button type="submit" name="submit" value="value" class="btn btn-success">Изменить</button>
+</form>
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список пользователей!</title>
+</head>
+<body>
+
+
+<form th:action="@{/addUser}" th:object="${user}" method="post">
+    <p>Имя: <input class="form-control" type="text" th:field="*{firstName}"/></p>
+    <p>Фамилия: <input class="form-control" type="text" th:field="*{lastName}"/></p>
+    <p>Логин: <input class="form-control" type="text" th:field="*{userName}"/></p>
+    <p>Пароль: <input class="form-control" type="password" th:field="*{passWord}"/></p>
+    <button type="submit" name="submit" value="value" class="btn btn-success">Добавить</button>
+</form>
+</body>
+
+</html>
