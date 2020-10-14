@@ -1,7 +1,6 @@
 package com.javamentor.repository;
 
 import com.javamentor.entity.User;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 

@@ -27,13 +27,17 @@ public class UserController {
         return "login";
     }
 
+    @GetMapping(value = "/user")
+    public String userPage() {
+        return "user";
+    }
+
     @GetMapping(value = "/addUser")
     public String displayNewUserForm(Model model) {
         model.addAttribute("headerMessage", "Введите данные пользователя");
         model.addAttribute("user", new User());
         return "addUser";
     }
-
 
     @GetMapping(value = "/editUser/{id}")
     public String displayEditUserForm(@PathVariable Long id, Model model) {
@@ -66,5 +70,4 @@ public class UserController {
         }
         return "redirect:/allUsers";
     }
-
 }
