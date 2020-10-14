@@ -2,12 +2,14 @@ package com.javamentor.controller;
 
 import com.javamentor.entity.Role;
 import com.javamentor.entity.User;
+import com.javamentor.repository.RoleRepository;
 import com.javamentor.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.RollbackException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -15,6 +17,8 @@ import java.util.Set;
 
 @Controller
 public class UserController {
+    @Autowired
+    private RoleRepository roleRepository;
 
     @Autowired
     private UserService userService;
@@ -58,11 +62,16 @@ public class UserController {
     }
 
     @PostMapping(value = "/editUser/{id}")
-    public String saveEditedUser( @ModelAttribute User user) {
-        boolean isUpdated = userService.updateUser(user);
-        if (!isUpdated) {
-            return "error";
+    public String saveEditedUser(@ModelAttribute User user, @RequestParam("role") String[] role) {
+        Set<Role> roles = new HashSet<>();
+
+        if (Arrays.toString(role).contains("ROLE_ADMIN")) {
+            roles.add(roleRepository.getById(2L));
+        } else {
+            roles.add(roleRepository.getById(1L));
         }
+        user.setRoles(roles);
+        userService.updateUser(user);
         return "redirect:/allUsers";
     }
 

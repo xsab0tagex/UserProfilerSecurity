@@ -17,4 +17,5 @@ public class RoleRepositoryImpl implements RoleRepository {
         return entityManager
                 .find(Role.class, id);
     }
+
 }

@@ -13,7 +13,6 @@
 
 <form th:action="@{editUser}" th:object="${user}" method="post">
     <input class="form-control" type="hidden" th:field="*{id}"/>
-    <!--    <p>Роль: <input type="hidden" th:field="*{roles}"/></p>-->
     <p>Имя: <label>
         <input class="form-control" type="text" th:field="*{firstName}"/>
     </label></p>
@@ -26,6 +25,13 @@
     <p>Пароль: <label>
         <input class="form-control" type="text" th:field="*{passWord}"/>
     </label></p>
+    <label>
+        <select name="role" class="browser-default custom-select">
+            <option value="ROLE_USER">ROLE_USER</option>
+            <option value="ROLE_ADMIN">ROLE_ADMIN</option>
+        </select>
+
+    </label>
     <button type="submit" class="btn btn-success">Изменить</button>
 </form>
 </body>
