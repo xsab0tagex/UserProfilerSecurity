@@ -48,8 +48,8 @@ public class UserController {
         return "addUser";
     }
 
-    @PostMapping(value = "/deleteUser/{id}")
-    public String deleteUserById(@PathVariable Long id) {
+    @PostMapping(value = "/deleteUser")
+    public String deleteUserById(@RequestParam("userid") Long id) {
         userService.deleteUserById(id);
         return "redirect:/allUsers";
     }
@@ -65,17 +65,15 @@ public class UserController {
 
     @PostMapping(value = "/editUser/{id}")
     public String saveEditedUser(@ModelAttribute User user, @RequestParam("role") String[] role, HttpServletRequest request) {
-        Set<Role> roles;
         Set<Role> new_roles = new HashSet<>();
-        roles = (Set<Role>) request.getSession().getAttribute("userRoles");
+        user.setRoles(new_roles);
+        userService.updateUser(user);
         if (Arrays.toString(role).contains("ROLE_ADMIN")) {
-            new_roles.add(roleRepository.getById(2L));              //TODO  Старые и новые права
+            new_roles.add(roleRepository.getById(2L));
         } else {
             new_roles.add(roleRepository.getById(1L));
         }
-        if (!new_roles.equals(roles)) {
             user.setRoles(new_roles);
-        }
         userService.updateUser(user);
         return "redirect:/allUsers";
     }

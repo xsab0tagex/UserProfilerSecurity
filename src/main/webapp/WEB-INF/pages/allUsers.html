@@ -25,13 +25,15 @@
     </thead>
     <tbody>
     <tr th:each="user : ${userList}">
+<!--        <input type="hidden" name="userid" id="userId" th:value="${user.id}" />-->
         <td th:text="${user.firstName}"></td>
         <td th:text="${user.lastName}"></td>
         <td th:text="${user.userName}"></td>
         <td>
-        <form method="POST" th:action="@{/deleteUser/{id}(id=${user.id})}">
-            <button type="submit" class="btn btn-danger">Delete</button>
-        </form>
+            <form method="POST" th:action="@{/deleteUser}">
+                <input type="hidden" name="userid" id="userid" th:value="${user.id}" />
+                <button type="submit" name="submit" value="value" class="btn btn-warning">Delete</button>
+            </form>
         </td>
         <td>
             <form method="GET" th:action="@{/editUser/{id}(id=${user.id})}">
