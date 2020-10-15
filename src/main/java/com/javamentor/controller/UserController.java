@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.RollbackException;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -54,23 +55,27 @@ public class UserController {
     }
 
     @GetMapping(value = "/editUser/{id}")
-    public String displayEditUserForm(@PathVariable Long id, Model model) {
+    public String displayEditUserForm(@PathVariable Long id, Model model, HttpServletRequest request) {
         User user = userService.getUserById(id);
+        request.getSession().setAttribute("userRoles", user.getRoles());
         model.addAttribute("headerMessage", "Редактирование пользователя");
         model.addAttribute("user", user);
         return "editUser";
     }
 
     @PostMapping(value = "/editUser/{id}")
-    public String saveEditedUser(@ModelAttribute User user, @RequestParam("role") String[] role) {
-        Set<Role> roles = new HashSet<>();
-
+    public String saveEditedUser(@ModelAttribute User user, @RequestParam("role") String[] role, HttpServletRequest request) {
+        Set<Role> roles;
+        Set<Role> new_roles = new HashSet<>();
+        roles = (Set<Role>) request.getSession().getAttribute("userRoles");
         if (Arrays.toString(role).contains("ROLE_ADMIN")) {
-            roles.add(roleRepository.getById(2L));
+            new_roles.add(roleRepository.getById(2L));              //TODO  Старые и новые права
         } else {
-            roles.add(roleRepository.getById(1L));
+            new_roles.add(roleRepository.getById(1L));
         }
-        user.setRoles(roles);
+        if (!new_roles.equals(roles)) {
+            user.setRoles(new_roles);
+        }
         userService.updateUser(user);
         return "redirect:/allUsers";
     }
