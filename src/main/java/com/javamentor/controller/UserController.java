@@ -9,8 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.RollbackException;
-import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -18,6 +16,7 @@ import java.util.Set;
 
 @Controller
 public class UserController {
+
     @Autowired
     private RoleRepository roleRepository;
 
@@ -55,16 +54,15 @@ public class UserController {
     }
 
     @GetMapping(value = "/editUser/{id}")
-    public String displayEditUserForm(@PathVariable Long id, Model model, HttpServletRequest request) {
+    public String displayEditUserForm(@PathVariable Long id, Model model) {
         User user = userService.getUserById(id);
-        request.getSession().setAttribute("userRoles", user.getRoles());
         model.addAttribute("headerMessage", "Редактирование пользователя");
         model.addAttribute("user", user);
         return "editUser";
     }
 
     @PostMapping(value = "/editUser/{id}")
-    public String saveEditedUser(@ModelAttribute User user, @RequestParam("role") String[] role, HttpServletRequest request) {
+    public String saveEditedUser(@ModelAttribute User user, @RequestParam("role") String[] role) {
         Set<Role> new_roles = new HashSet<>();
         user.setRoles(new_roles);
         userService.updateUser(user);
@@ -73,7 +71,7 @@ public class UserController {
         } else {
             new_roles.add(roleRepository.getById(1L));
         }
-            user.setRoles(new_roles);
+        user.setRoles(new_roles);
         userService.updateUser(user);
         return "redirect:/allUsers";
     }
