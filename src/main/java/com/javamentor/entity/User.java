@@ -2,8 +2,9 @@ package com.javamentor.entity;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Set;
 
@@ -16,9 +17,17 @@ public class User implements UserDetails {
     private Long id;
 
     @Column (unique = true)
+    @NotNull
+    @Size(min=2, max=30)
     private String userName;
+    @NotNull
+    @Size(min=2, max=30)
     private String firstName;
+    @NotNull
+    @Size(min=2, max=30)
     private String lastName;
+    @NotNull
+    @Size(min=2, max=30)
     private String passWord;
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),

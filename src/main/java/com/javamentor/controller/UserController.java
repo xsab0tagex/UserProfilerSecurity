@@ -7,8 +7,10 @@ import com.javamentor.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -68,7 +70,8 @@ public class UserController {
         userService.updateUser(user);
         if (Arrays.toString(role).contains("ROLE_ADMIN")) {
             new_roles.add(roleRepository.getById(2L));
-        } else {
+        }
+        if (Arrays.toString(role).contains("ROLE_USER")) {
             new_roles.add(roleRepository.getById(1L));
         }
         user.setRoles(new_roles);
@@ -77,7 +80,10 @@ public class UserController {
     }
 
     @PostMapping(value = "/addUser")
-    public String saveNewUser(@ModelAttribute User user) {
+    public String saveNewUser(@Valid User user, BindingResult bindingResult ) {
+        if (bindingResult.hasErrors()) {
+            return "addUser";
+        }
         boolean isAdded = userService.saveUser(user);
         if (!isAdded) {
             return "error";

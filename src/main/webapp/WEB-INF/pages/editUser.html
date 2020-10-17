@@ -26,10 +26,10 @@
         <input class="form-control" type="text" th:field="*{passWord}"/>
     </label></p>
     <label>
-        <select name="role" class="browser-default custom-select">
-            <option value="ROLE_USER">ROLE_USER</option>
-            <option value="ROLE_ADMIN">ROLE_ADMIN</option>
-        </select>
+            <select class="mdb-select md-form" id="role" name="role" multiple>
+                <option value="ROLE_USER" selected>ROLE_USER</option>
+                <option value="ROLE_ADMIN">ROLE_ADMIN</option>
+            </select>
 
     </label>
     <button type="submit" class="btn btn-success">Изменить</button>
